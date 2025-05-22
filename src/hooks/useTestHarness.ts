@@ -62,13 +62,23 @@ export const useTestHarness = (): [TestHarnessState, TestHarnessActions] => {
   }, []);
 
   const openFullscreen = useCallback(() => {
-    const url = new URL(window.location.href);
-    url.searchParams.set('hideDashboard', 'true');
-    url.searchParams.set('apiUrl', state.apiUrl);
-    url.searchParams.set('frameSource', state.frameSource);
-    url.searchParams.set('screenSize', state.screenSize);
-    url.searchParams.set('background', state.background);
-    window.open(url.toString(), '_blank');
+    // Create base URL without query parameters
+    const baseUrl = window.location.href.split('?')[0];
+    
+    // Manually create query string without encoding special characters
+    const queryParams = [
+      'hideDashboard=true',
+      `apiUrl=${state.apiUrl}`,
+      `frameSource=${state.frameSource}`,
+      `screenSize=${state.screenSize}`,
+      `background=${state.background}`
+    ].join('&');
+    
+    // Combine base URL and unencoded query parameters
+    const fullUrl = `${baseUrl}?${queryParams}`;
+    
+    // Open in new tab
+    window.open(fullUrl, '_blank');
   }, [state.apiUrl, state.frameSource, state.screenSize, state.background]);
 
   const actions: TestHarnessActions = {
