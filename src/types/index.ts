@@ -16,6 +16,7 @@ export interface TestHarnessActions {
   toggleDashboard: () => void;
   toggleBorder: () => void;
   signOut: () => void;
+  openFullscreen: () => void;
 }
 
 export interface ComponentUnderTestProps {

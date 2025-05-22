@@ -1,6 +1,6 @@
 import React from 'react';
 import { ScreenSize, TestHarnessState, TestHarnessActions } from '../types';
-import { X, Smartphone, Tablet, Monitor, LogOut, ChevronUp, ChevronDown, Square, Square as SquareOff } from 'lucide-react';
+import { Smartphone, Tablet, Monitor, LogOut, ChevronUp, ChevronDown, Square, Maximize } from 'lucide-react';
 
 interface DashboardProps {
   state: TestHarnessState;
@@ -9,7 +9,7 @@ interface DashboardProps {
 
 const Dashboard: React.FC<DashboardProps> = ({ state, actions }) => {
   const { apiUrl, frameSource, screenSize, isDashboardVisible, showBorder } = state;
-  const { setApiUrl, setFrameSource, setScreenSize, toggleDashboard, toggleBorder, signOut } = actions;
+  const { setApiUrl, setFrameSource, setScreenSize, toggleDashboard, toggleBorder, signOut, openFullscreen } = actions;
 
   if (!isDashboardVisible) {
     return (
@@ -31,6 +31,13 @@ const Dashboard: React.FC<DashboardProps> = ({ state, actions }) => {
         <div className="flex justify-between items-center mb-4">
           <h1 className="text-xl font-semibold text-gray-800">Component Test Harness</h1>
           <div className="flex items-center gap-3">
+            <button
+              onClick={openFullscreen}
+              className="flex items-center gap-2 px-3 py-1.5 bg-green-600 hover:bg-green-700 rounded-lg text-white transition-colors"
+            >
+              <Maximize size={16} />
+              <span>View Fullscreen</span>
+            </button>
             <button
               onClick={signOut}
               className="flex items-center gap-2 px-3 py-1.5 bg-gray-100 hover:bg-gray-200 rounded-lg text-gray-700 transition-colors"
@@ -123,7 +130,7 @@ const Dashboard: React.FC<DashboardProps> = ({ state, actions }) => {
                   showBorder ? 'bg-blue-100 text-blue-800 border border-blue-300' : 'bg-gray-100 text-gray-700 border border-gray-200 hover:bg-gray-200'
                 }`}
               >
-                {showBorder ? <Square size={24} /> : <SquareOff size={24} />}
+                <Square size={24} />
                 <span className="mt-1 text-sm">{showBorder ? 'Hide Border' : 'Show Border'}</span>
               </button>
             </div>

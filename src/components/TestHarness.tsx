@@ -34,14 +34,14 @@ const TestHarness: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col">
-      <Dashboard state={state} actions={actions} />
+      {isDashboardVisible && <Dashboard state={state} actions={actions} />}
       
-      <div className="flex-1">
-        <div className="max-w-7xl mx-auto px-4 py-6">
+      <div className="flex-1 flex items-center justify-center py-8">
+        <div className="max-w-7xl mx-auto px-4">
           <div className="flex flex-col items-center">            
             <div 
               className={`${
-                screenSize !== 'desktop' ? `${showBorder ? 'border-2 border-gray-300 rounded-xl overflow-hidden shadow-lg' : ''}` : 'w-full'
+                showBorder ? 'border-2 border-gray-300 rounded-xl overflow-hidden shadow-lg' : ''
               } transition-all duration-300`}
               style={{ 
                 width: deviceDimensions[screenSize as ScreenSize].width,
@@ -49,8 +49,8 @@ const TestHarness: React.FC = () => {
               }}
             >
               <div className={`
-                ${screenSize !== 'desktop' ? 'p-4 h-full overflow-auto' : 'py-6'}
-                ${showBorder ? 'bg-white' : ''}
+                ${screenSize !== 'desktop' ? 'h-full overflow-auto' : ''}
+                ${showBorder ? 'bg-white p-4' : ''}
               `}>
                 <ComponentUnderTest 
                   apiUrl={apiUrl} 
