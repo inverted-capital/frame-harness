@@ -46,10 +46,6 @@ export const useTestHarness = (): [TestHarnessState, TestHarnessActions] => {
     setState((prev) => ({ ...prev, screenSize }));
   }, []);
 
-  const toggleDashboard = useCallback(() => {
-    setState((prev) => ({ ...prev, isDashboardVisible: !prev.isDashboardVisible }));
-  }, []);
-
   const toggleBorder = useCallback(() => {
     setState((prev) => ({ ...prev, showBorder: !prev.showBorder }));
   }, []);
@@ -71,7 +67,6 @@ export const useTestHarness = (): [TestHarnessState, TestHarnessActions] => {
     setApiUrl,
     setFrameSource,
     setScreenSize,
-    toggleDashboard,
     toggleBorder,
     signOut,
     openFullscreen,

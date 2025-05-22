@@ -13,7 +13,6 @@ export interface TestHarnessActions {
   setApiUrl: (url: string) => void;
   setFrameSource: (url: string) => void;
   setScreenSize: (size: ScreenSize) => void;
-  toggleDashboard: () => void;
   toggleBorder: () => void;
   signOut: () => void;
   openFullscreen: () => void;

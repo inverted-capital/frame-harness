@@ -1,6 +1,6 @@
 import React from 'react';
 import { ScreenSize, TestHarnessState, TestHarnessActions } from '../types';
-import { Smartphone, Tablet, Monitor, LogOut, ChevronUp, ChevronDown, Square, Maximize } from 'lucide-react';
+import { Smartphone, Tablet, Monitor, LogOut, Maximize, Square } from 'lucide-react';
 
 interface DashboardProps {
   state: TestHarnessState;
@@ -8,22 +8,8 @@ interface DashboardProps {
 }
 
 const Dashboard: React.FC<DashboardProps> = ({ state, actions }) => {
-  const { apiUrl, frameSource, screenSize, isDashboardVisible, showBorder } = state;
-  const { setApiUrl, setFrameSource, setScreenSize, toggleDashboard, toggleBorder, signOut, openFullscreen } = actions;
-
-  if (!isDashboardVisible) {
-    return (
-      <div className="w-full bg-blue-600 text-white py-2 flex justify-center">
-        <button
-          onClick={toggleDashboard}
-          className="flex items-center gap-2 px-4 py-1 rounded-lg hover:bg-blue-700 transition-colors"
-        >
-          <ChevronDown size={18} />
-          <span>Show Dashboard</span>
-        </button>
-      </div>
-    );
-  }
+  const { apiUrl, frameSource, screenSize, showBorder } = state;
+  const { setApiUrl, setFrameSource, setScreenSize, toggleBorder, signOut, openFullscreen } = actions;
 
   return (
     <div className="w-full bg-white shadow-md border-b border-gray-200 px-4 py-4 transition-all">
@@ -44,13 +30,6 @@ const Dashboard: React.FC<DashboardProps> = ({ state, actions }) => {
             >
               <LogOut size={16} />
               <span>Sign Out</span>
-            </button>
-            <button
-              onClick={toggleDashboard}
-              className="flex items-center gap-2 px-3 py-1.5 bg-blue-600 hover:bg-blue-700 rounded-lg text-white transition-colors"
-            >
-              <ChevronUp size={16} />
-              <span>Hide Dashboard</span>
             </button>
           </div>
         </div>
