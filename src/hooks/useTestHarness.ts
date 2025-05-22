@@ -15,8 +15,8 @@ export const useTestHarness = (): [TestHarnessState, TestHarnessActions] => {
     screenSize: 'desktop',
     isDashboardVisible: initDashboardVisible(),
     isAuthenticated: true,
-    showBorder: true,
-    background: 'white',
+    showBorder: false,
+    background: 'checkered',
   });
 
   // Update state from URL params on mount
