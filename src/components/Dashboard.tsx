@@ -1,6 +1,6 @@
 import React from 'react';
-import { ScreenSize, TestHarnessState, TestHarnessActions } from '../types';
-import { Smartphone, Tablet, Monitor, LogOut, Maximize, Square } from 'lucide-react';
+import { ScreenSize, TestHarnessState, TestHarnessActions, BackgroundType } from '../types';
+import { Smartphone, Tablet, Monitor, LogOut, Maximize, Square, Sun, CircleSlash, CheckSquare } from 'lucide-react';
 
 interface DashboardProps {
   state: TestHarnessState;
@@ -8,8 +8,8 @@ interface DashboardProps {
 }
 
 const Dashboard: React.FC<DashboardProps> = ({ state, actions }) => {
-  const { apiUrl, frameSource, screenSize, showBorder } = state;
-  const { setApiUrl, setFrameSource, setScreenSize, toggleBorder, signOut, openFullscreen } = actions;
+  const { apiUrl, frameSource, screenSize, showBorder, background } = state;
+  const { setApiUrl, setFrameSource, setScreenSize, toggleBorder, signOut, openFullscreen, setBackground } = actions;
 
   return (
     <div className="w-full bg-white shadow-md border-b border-gray-200 px-4 py-4 transition-all">
@@ -102,7 +102,7 @@ const Dashboard: React.FC<DashboardProps> = ({ state, actions }) => {
 
           <div className="space-y-4">
             <h2 className="text-sm font-medium text-gray-700 uppercase tracking-wider">Display Options</h2>
-            <div className="flex gap-3">
+            <div className="grid grid-cols-2 gap-3">
               <button
                 onClick={toggleBorder}
                 className={`flex flex-col items-center justify-center px-4 py-3 rounded-lg transition-colors ${
@@ -112,6 +112,60 @@ const Dashboard: React.FC<DashboardProps> = ({ state, actions }) => {
                 <Square size={24} />
                 <span className="mt-1 text-sm">{showBorder ? 'Hide Border' : 'Show Border'}</span>
               </button>
+            </div>
+
+            <div className="space-y-2">
+              <h3 className="text-sm font-medium text-gray-700">Background</h3>
+              <div className="grid grid-cols-2 gap-2">
+                <button
+                  onClick={() => setBackground('white')}
+                  className={`flex items-center gap-2 px-3 py-2 rounded transition-colors ${
+                    background === 'white' ? 'bg-blue-100 text-blue-800 border border-blue-300' : 'bg-white text-gray-700 border border-gray-200 hover:bg-gray-50'
+                  }`}
+                >
+                  <div className="w-4 h-4 bg-white border border-gray-300 rounded"></div>
+                  <span className="text-sm">White</span>
+                </button>
+                <button
+                  onClick={() => setBackground('gray')}
+                  className={`flex items-center gap-2 px-3 py-2 rounded transition-colors ${
+                    background === 'gray' ? 'bg-blue-100 text-blue-800 border border-blue-300' : 'bg-white text-gray-700 border border-gray-200 hover:bg-gray-50'
+                  }`}
+                >
+                  <div className="w-4 h-4 bg-gray-200 rounded"></div>
+                  <span className="text-sm">Gray</span>
+                </button>
+                <button
+                  onClick={() => setBackground('black')}
+                  className={`flex items-center gap-2 px-3 py-2 rounded transition-colors ${
+                    background === 'black' ? 'bg-blue-100 text-blue-800 border border-blue-300' : 'bg-white text-gray-700 border border-gray-200 hover:bg-gray-50'
+                  }`}
+                >
+                  <div className="w-4 h-4 bg-black rounded"></div>
+                  <span className="text-sm">Black</span>
+                </button>
+                <button
+                  onClick={() => setBackground('checkered')}
+                  className={`flex items-center gap-2 px-3 py-2 rounded transition-colors ${
+                    background === 'checkered' ? 'bg-blue-100 text-blue-800 border border-blue-300' : 'bg-white text-gray-700 border border-gray-200 hover:bg-gray-50'
+                  }`}
+                >
+                  <div className="w-4 h-4 bg-gray-100 border border-gray-300 rounded overflow-hidden relative">
+                    <div className="absolute top-0 left-0 w-2 h-2 bg-gray-300"></div>
+                    <div className="absolute bottom-0 right-0 w-2 h-2 bg-gray-300"></div>
+                  </div>
+                  <span className="text-sm">Checkered</span>
+                </button>
+                <button
+                  onClick={() => setBackground('gradient')}
+                  className={`flex items-center gap-2 px-3 py-2 rounded transition-colors ${
+                    background === 'gradient' ? 'bg-blue-100 text-blue-800 border border-blue-300' : 'bg-white text-gray-700 border border-gray-200 hover:bg-gray-50'
+                  }`}
+                >
+                  <div className="w-4 h-4 bg-gradient-to-r from-blue-300 to-purple-300 rounded"></div>
+                  <span className="text-sm">Gradient</span>
+                </button>
+              </div>
             </div>
           </div>
 
@@ -134,6 +188,10 @@ const Dashboard: React.FC<DashboardProps> = ({ state, actions }) => {
                 <div className="sm:col-span-1">
                   <dt className="text-sm font-medium text-gray-500">Border</dt>
                   <dd className="mt-1 text-sm text-gray-900">{showBorder ? 'Visible' : 'Hidden'}</dd>
+                </div>
+                <div className="sm:col-span-1">
+                  <dt className="text-sm font-medium text-gray-500">Background</dt>
+                  <dd className="mt-1 text-sm text-gray-900 capitalize">{background}</dd>
                 </div>
               </dl>
             </div>

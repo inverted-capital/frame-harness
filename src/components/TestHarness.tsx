@@ -2,7 +2,7 @@ import React from 'react';
 import Dashboard from './Dashboard';
 import ComponentUnderTest from './ComponentUnderTest';
 import { useTestHarness } from '../hooks/useTestHarness';
-import { ScreenSize } from '../types';
+import { ScreenSize, BackgroundType } from '../types';
 
 const deviceDimensions = {
   mobile: { width: '375px', height: '667px' },
@@ -10,9 +10,26 @@ const deviceDimensions = {
   desktop: { width: '100%', height: 'auto' },
 };
 
+const getBackgroundStyles = (backgroundType: BackgroundType) => {
+  switch (backgroundType) {
+    case 'white':
+      return 'bg-white';
+    case 'gray':
+      return 'bg-gray-200';
+    case 'black':
+      return 'bg-black';
+    case 'checkered':
+      return 'bg-checkered';
+    case 'gradient':
+      return 'bg-gradient-to-r from-blue-300 to-purple-300';
+    default:
+      return 'bg-white';
+  }
+};
+
 const TestHarness: React.FC = () => {
   const [state, actions] = useTestHarness();
-  const { apiUrl, frameSource, screenSize, isDashboardVisible, isAuthenticated, showBorder } = state;
+  const { apiUrl, frameSource, screenSize, isDashboardVisible, isAuthenticated, showBorder, background } = state;
 
   // Redirect to login if not authenticated
   if (!isAuthenticated) {
@@ -32,11 +49,13 @@ const TestHarness: React.FC = () => {
     );
   }
 
+  const backgroundStyles = getBackgroundStyles(background);
+
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col">
+    <div className="min-h-screen flex flex-col">
       {isDashboardVisible && <Dashboard state={state} actions={actions} />}
       
-      <div className="flex-1 flex items-center justify-center py-8">
+      <div className={`flex-1 flex items-center justify-center py-8 ${backgroundStyles}`}>
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex flex-col items-center">            
             <div 

@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect } from 'react';
-import { ScreenSize, TestHarnessState, TestHarnessActions } from '../types';
+import { ScreenSize, TestHarnessState, TestHarnessActions, BackgroundType } from '../types';
 
 export const useTestHarness = (): [TestHarnessState, TestHarnessActions] => {
   // Check URL params for dashboard visibility
@@ -16,6 +16,7 @@ export const useTestHarness = (): [TestHarnessState, TestHarnessActions] => {
     isDashboardVisible: initDashboardVisible(),
     isAuthenticated: true,
     showBorder: true,
+    background: 'white',
   });
 
   // Update state from URL params on mount
@@ -25,12 +26,14 @@ export const useTestHarness = (): [TestHarnessState, TestHarnessActions] => {
     const apiUrl = urlParams.get('apiUrl');
     const frameSource = urlParams.get('frameSource');
     const screenSize = urlParams.get('screenSize');
+    const background = urlParams.get('background');
     
     setState(prev => ({
       ...prev,
       apiUrl: apiUrl || prev.apiUrl,
       frameSource: frameSource || prev.frameSource,
       screenSize: (screenSize as ScreenSize) || prev.screenSize,
+      background: (background as BackgroundType) || prev.background,
     }));
   }, []);
 
@@ -50,6 +53,10 @@ export const useTestHarness = (): [TestHarnessState, TestHarnessActions] => {
     setState((prev) => ({ ...prev, showBorder: !prev.showBorder }));
   }, []);
 
+  const setBackground = useCallback((background: BackgroundType) => {
+    setState((prev) => ({ ...prev, background }));
+  }, []);
+
   const signOut = useCallback(() => {
     setState((prev) => ({ ...prev, isAuthenticated: false }));
   }, []);
@@ -60,8 +67,9 @@ export const useTestHarness = (): [TestHarnessState, TestHarnessActions] => {
     url.searchParams.set('apiUrl', state.apiUrl);
     url.searchParams.set('frameSource', state.frameSource);
     url.searchParams.set('screenSize', state.screenSize);
+    url.searchParams.set('background', state.background);
     window.open(url.toString(), '_blank');
-  }, [state.apiUrl, state.frameSource, state.screenSize]);
+  }, [state.apiUrl, state.frameSource, state.screenSize, state.background]);
 
   const actions: TestHarnessActions = {
     setApiUrl,
@@ -70,6 +78,7 @@ export const useTestHarness = (): [TestHarnessState, TestHarnessActions] => {
     toggleBorder,
     signOut,
     openFullscreen,
+    setBackground,
   };
 
   return [state, actions];

@@ -1,4 +1,5 @@
 export type ScreenSize = 'mobile' | 'tablet' | 'desktop';
+export type BackgroundType = 'white' | 'gray' | 'black' | 'checkered' | 'gradient';
 
 export interface TestHarnessState {
   apiUrl: string;
@@ -7,6 +8,7 @@ export interface TestHarnessState {
   isDashboardVisible: boolean;
   isAuthenticated: boolean;
   showBorder: boolean;
+  background: BackgroundType;
 }
 
 export interface TestHarnessActions {
@@ -16,6 +18,7 @@ export interface TestHarnessActions {
   toggleBorder: () => void;
   signOut: () => void;
   openFullscreen: () => void;
+  setBackground: (type: BackgroundType) => void;
 }
 
 export interface ComponentUnderTestProps {
