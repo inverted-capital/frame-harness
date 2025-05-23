@@ -34,7 +34,7 @@ const Dashboard: React.FC<DashboardProps> = ({ state, actions }) => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           <div className="space-y-4">
             <h2 className="text-sm font-medium text-gray-700 uppercase tracking-wider">URLs</h2>
             <div className="space-y-3">
@@ -139,44 +139,44 @@ const Dashboard: React.FC<DashboardProps> = ({ state, actions }) => {
           </div>
 
           <div className="space-y-4">
-            <h2 className="text-sm font-medium text-gray-700 uppercase tracking-wider">Screen Size</h2>
-            <div className="flex gap-3">
-              <button
-                onClick={() => setScreenSize('mobile')}
-                className={`flex flex-col items-center justify-center px-4 py-3 rounded-lg transition-colors ${
-                  screenSize === 'mobile' ? 'bg-blue-100 text-blue-800 border border-blue-300' : 'bg-gray-100 text-gray-700 border border-gray-200 hover:bg-gray-200'
-                }`}
-              >
-                <Smartphone size={24} />
-                <span className="mt-1 text-sm">Mobile</span>
-              </button>
-              <button
-                onClick={() => setScreenSize('tablet')}
-                className={`flex flex-col items-center justify-center px-4 py-3 rounded-lg transition-colors ${
-                  screenSize === 'tablet' ? 'bg-blue-100 text-blue-800 border border-blue-300' : 'bg-gray-100 text-gray-700 border border-gray-200 hover:bg-gray-200'
-                }`}
-              >
-                <Tablet size={24} />
-                <span className="mt-1 text-sm">Tablet</span>
-              </button>
-              <button
-                onClick={() => setScreenSize('desktop')}
-                className={`flex flex-col items-center justify-center px-4 py-3 rounded-lg transition-colors ${
-                  screenSize === 'desktop' ? 'bg-blue-100 text-blue-800 border border-blue-300' : 'bg-gray-100 text-gray-700 border border-gray-200 hover:bg-gray-200'
-                }`}
-              >
-                <Monitor size={24} />
-                <span className="mt-1 text-sm">Desktop</span>
-              </button>
-            </div>
-          </div>
-
-          <div className="space-y-4">
             <h2 className="text-sm font-medium text-gray-700 uppercase tracking-wider">Display Options</h2>
+            
+            <div className="space-y-4">
+              <h3 className="text-sm font-medium text-gray-700">Screen Size</h3>
+              <div className="flex gap-3">
+                <button
+                  onClick={() => setScreenSize('mobile')}
+                  className={`flex flex-col items-center justify-center px-4 py-3 rounded-lg transition-colors ${
+                    screenSize === 'mobile' ? 'bg-blue-100 text-blue-800 border border-blue-300' : 'bg-gray-100 text-gray-700 border border-gray-200 hover:bg-gray-200'
+                  }`}
+                >
+                  <Smartphone size={24} />
+                  <span className="mt-1 text-sm">Mobile</span>
+                </button>
+                <button
+                  onClick={() => setScreenSize('tablet')}
+                  className={`flex flex-col items-center justify-center px-4 py-3 rounded-lg transition-colors ${
+                    screenSize === 'tablet' ? 'bg-blue-100 text-blue-800 border border-blue-300' : 'bg-gray-100 text-gray-700 border border-gray-200 hover:bg-gray-200'
+                  }`}
+                >
+                  <Tablet size={24} />
+                  <span className="mt-1 text-sm">Tablet</span>
+                </button>
+                <button
+                  onClick={() => setScreenSize('desktop')}
+                  className={`flex flex-col items-center justify-center px-4 py-3 rounded-lg transition-colors ${
+                    screenSize === 'desktop' ? 'bg-blue-100 text-blue-800 border border-blue-300' : 'bg-gray-100 text-gray-700 border border-gray-200 hover:bg-gray-200'
+                  }`}
+                >
+                  <Monitor size={24} />
+                  <span className="mt-1 text-sm">Desktop</span>
+                </button>
+              </div>
+            </div>
             
             <div className="space-y-2">
               <h3 className="text-sm font-medium text-gray-700">Background</h3>
-              <div className="grid grid-cols-2 gap-2">
+              <div className="flex gap-2">
                 <button
                   onClick={() => setBackground('white')}
                   className={`flex items-center gap-2 px-3 py-2 rounded transition-colors ${
@@ -198,19 +198,16 @@ const Dashboard: React.FC<DashboardProps> = ({ state, actions }) => {
                   </div>
                   <span className="text-sm">Checkered</span>
                 </button>
+                <button
+                  onClick={toggleBorder}
+                  className={`flex items-center gap-2 px-3 py-2 rounded transition-colors ${
+                    showBorder ? 'bg-blue-100 text-blue-800 border border-blue-300' : 'bg-white text-gray-700 border border-gray-200 hover:bg-gray-50'
+                  }`}
+                >
+                  <Square size={16} />
+                  <span className="text-sm">{showBorder ? 'Hide Border' : 'Show Border'}</span>
+                </button>
               </div>
-            </div>
-            
-            <div>
-              <button
-                onClick={toggleBorder}
-                className={`flex items-center gap-2 px-3 py-2 rounded transition-colors ${
-                  showBorder ? 'bg-blue-100 text-blue-800 border border-blue-300' : 'bg-white text-gray-700 border border-gray-200 hover:bg-gray-50'
-                }`}
-              >
-                <Square size={16} />
-                <span className="text-sm">{showBorder ? 'Hide Border' : 'Show Border'}</span>
-              </button>
             </div>
           </div>
 
@@ -230,34 +227,44 @@ const Dashboard: React.FC<DashboardProps> = ({ state, actions }) => {
                   <dt className="text-sm font-medium text-gray-500">Frame Source</dt>
                   <dd className="mt-1 text-sm text-gray-900 truncate">{frameSource}</dd>
                 </div>
+                {privyAppId && (
+                  <div className="sm:col-span-1">
+                    <dt className="text-sm font-medium text-gray-500">Privy App ID</dt>
+                    <dd className="mt-1 text-sm text-gray-900 truncate">{privyAppId}</dd>
+                  </div>
+                )}
                 <div className="sm:col-span-1">
-                  <dt className="text-sm font-medium text-gray-500">Privy App ID</dt>
-                  <dd className="mt-1 text-sm text-gray-900 truncate">{privyAppId}</dd>
+                  <dt className="text-sm font-medium text-gray-500 inline">Border: </dt>
+                  <dd className="text-sm text-gray-900 inline">{showBorder ? 'Visible' : 'Hidden'}</dd>
                 </div>
                 <div className="sm:col-span-1">
-                  <dt className="text-sm font-medium text-gray-500">Border</dt>
-                  <dd className="mt-1 text-sm text-gray-900">{showBorder ? 'Visible' : 'Hidden'}</dd>
+                  <dt className="text-sm font-medium text-gray-500 inline">Background: </dt>
+                  <dd className="text-sm text-gray-900 inline capitalize">{background}</dd>
                 </div>
-                <div className="sm:col-span-1">
-                  <dt className="text-sm font-medium text-gray-500">Background</dt>
-                  <dd className="mt-1 text-sm text-gray-900 capitalize">{background}</dd>
-                </div>
-                <div className="sm:col-span-1">
-                  <dt className="text-sm font-medium text-gray-500">Repo</dt>
-                  <dd className="mt-1 text-sm text-gray-900 truncate">{scope.repo || '-'}</dd>
-                </div>
-                <div className="sm:col-span-1">
-                  <dt className="text-sm font-medium text-gray-500">Branch</dt>
-                  <dd className="mt-1 text-sm text-gray-900 truncate">{scope.branch || '-'}</dd>
-                </div>
-                <div className="sm:col-span-1">
-                  <dt className="text-sm font-medium text-gray-500">Commit</dt>
-                  <dd className="mt-1 text-sm text-gray-900 truncate">{scope.commit || '-'}</dd>
-                </div>
-                <div className="sm:col-span-1">
-                  <dt className="text-sm font-medium text-gray-500">Path</dt>
-                  <dd className="mt-1 text-sm text-gray-900 truncate">{scope.path || '-'}</dd>
-                </div>
+                {scope.repo && (
+                  <div className="sm:col-span-1">
+                    <dt className="text-sm font-medium text-gray-500 inline">Repo: </dt>
+                    <dd className="text-sm text-gray-900 inline truncate">{scope.repo}</dd>
+                  </div>
+                )}
+                {scope.branch && (
+                  <div className="sm:col-span-1">
+                    <dt className="text-sm font-medium text-gray-500 inline">Branch: </dt>
+                    <dd className="text-sm text-gray-900 inline truncate">{scope.branch}</dd>
+                  </div>
+                )}
+                {scope.commit && (
+                  <div className="sm:col-span-1">
+                    <dt className="text-sm font-medium text-gray-500 inline">Commit: </dt>
+                    <dd className="text-sm text-gray-900 inline truncate">{scope.commit}</dd>
+                  </div>
+                )}
+                {scope.path && (
+                  <div className="sm:col-span-1">
+                    <dt className="text-sm font-medium text-gray-500 inline">Path: </dt>
+                    <dd className="text-sm text-gray-900 inline truncate">{scope.path}</dd>
+                  </div>
+                )}
               </dl>
             </div>
           </div>
