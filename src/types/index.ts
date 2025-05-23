@@ -4,6 +4,7 @@ export type BackgroundType = 'white' | 'gray' | 'black' | 'checkered' | 'gradien
 export interface TestHarnessState {
   apiUrl: string;
   frameSource: string;
+  privyAppId: string;
   screenSize: ScreenSize;
   isDashboardVisible: boolean;
   isAuthenticated: boolean;
@@ -14,6 +15,7 @@ export interface TestHarnessState {
 export interface TestHarnessActions {
   setApiUrl: (url: string) => void;
   setFrameSource: (url: string) => void;
+  setPrivyAppId: (id: string) => void;
   setScreenSize: (size: ScreenSize) => void;
   toggleBorder: () => void;
   signOut: () => void;
@@ -24,4 +26,5 @@ export interface TestHarnessActions {
 export interface ComponentUnderTestProps {
   apiUrl: string;
   frameSource: string;
+  privyAppId: string;
 }

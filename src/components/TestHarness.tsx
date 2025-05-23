@@ -29,7 +29,7 @@ const getBackgroundStyles = (backgroundType: BackgroundType) => {
 
 const TestHarness: React.FC = () => {
   const [state, actions] = useTestHarness();
-  const { apiUrl, frameSource, screenSize, isDashboardVisible, isAuthenticated, showBorder, background } = state;
+  const { apiUrl, frameSource, privyAppId, screenSize, isDashboardVisible, isAuthenticated, showBorder, background } = state;
 
   // Redirect to login if not authenticated
   if (!isAuthenticated) {
@@ -73,7 +73,8 @@ const TestHarness: React.FC = () => {
               `}>
                 <ComponentUnderTest 
                   apiUrl={apiUrl} 
-                  frameSource={frameSource} 
+                  frameSource={frameSource}
+                  privyAppId={privyAppId}
                 />
               </div>
             </div>

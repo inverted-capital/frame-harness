@@ -8,8 +8,8 @@ interface DashboardProps {
 }
 
 const Dashboard: React.FC<DashboardProps> = ({ state, actions }) => {
-  const { apiUrl, frameSource, screenSize, showBorder, background } = state;
-  const { setApiUrl, setFrameSource, setScreenSize, toggleBorder, signOut, openFullscreen, setBackground } = actions;
+  const { apiUrl, frameSource, privyAppId, screenSize, showBorder, background } = state;
+  const { setApiUrl, setFrameSource, setPrivyAppId, setScreenSize, toggleBorder, signOut, openFullscreen, setBackground } = actions;
 
   return (
     <div className="w-full bg-white shadow-md border-b border-gray-200 px-4 py-4 transition-all">
@@ -62,6 +62,19 @@ const Dashboard: React.FC<DashboardProps> = ({ state, actions }) => {
                   onChange={(e) => setFrameSource(e.target.value)}
                   className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                   placeholder="https://source.example.com"
+                />
+              </div>
+              <div>
+                <label htmlFor="privy-app-id" className="block text-sm font-medium text-gray-700">
+                  Privy App ID
+                </label>
+                <input
+                  id="privy-app-id"
+                  type="text"
+                  value={privyAppId}
+                  onChange={(e) => setPrivyAppId(e.target.value)}
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  placeholder="123456789"
                 />
               </div>
             </div>
@@ -184,6 +197,10 @@ const Dashboard: React.FC<DashboardProps> = ({ state, actions }) => {
                 <div className="sm:col-span-1">
                   <dt className="text-sm font-medium text-gray-500">Frame Source</dt>
                   <dd className="mt-1 text-sm text-gray-900 truncate">{frameSource}</dd>
+                </div>
+                <div className="sm:col-span-1">
+                  <dt className="text-sm font-medium text-gray-500">Privy App ID</dt>
+                  <dd className="mt-1 text-sm text-gray-900 truncate">{privyAppId}</dd>
                 </div>
                 <div className="sm:col-span-1">
                   <dt className="text-sm font-medium text-gray-500">Border</dt>

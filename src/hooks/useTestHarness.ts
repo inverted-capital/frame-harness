@@ -12,6 +12,7 @@ export const useTestHarness = (): [TestHarnessState, TestHarnessActions] => {
   const [state, setState] = useState<TestHarnessState>({
     apiUrl: 'https://api.example.com',
     frameSource: 'https://source.example.com',
+    privyAppId: '123456789',
     screenSize: 'desktop',
     isDashboardVisible: initDashboardVisible(),
     isAuthenticated: true,
@@ -25,6 +26,7 @@ export const useTestHarness = (): [TestHarnessState, TestHarnessActions] => {
     
     const apiUrl = urlParams.get('apiUrl');
     const frameSource = urlParams.get('frameSource');
+    const privyAppId = urlParams.get('privyAppId');
     const screenSize = urlParams.get('screenSize');
     const background = urlParams.get('background');
     
@@ -32,6 +34,7 @@ export const useTestHarness = (): [TestHarnessState, TestHarnessActions] => {
       ...prev,
       apiUrl: apiUrl || prev.apiUrl,
       frameSource: frameSource || prev.frameSource,
+      privyAppId: privyAppId || prev.privyAppId,
       screenSize: (screenSize as ScreenSize) || prev.screenSize,
       background: (background as BackgroundType) || prev.background,
     }));
@@ -43,6 +46,10 @@ export const useTestHarness = (): [TestHarnessState, TestHarnessActions] => {
 
   const setFrameSource = useCallback((frameSource: string) => {
     setState((prev) => ({ ...prev, frameSource }));
+  }, []);
+
+  const setPrivyAppId = useCallback((privyAppId: string) => {
+    setState((prev) => ({ ...prev, privyAppId }));
   }, []);
 
   const setScreenSize = useCallback((screenSize: ScreenSize) => {
@@ -70,6 +77,7 @@ export const useTestHarness = (): [TestHarnessState, TestHarnessActions] => {
       'hideDashboard=true',
       `apiUrl=${state.apiUrl}`,
       `frameSource=${state.frameSource}`,
+      `privyAppId=${state.privyAppId}`,
       `screenSize=${state.screenSize}`,
       `background=${state.background}`
     ].join('&');
@@ -79,11 +87,12 @@ export const useTestHarness = (): [TestHarnessState, TestHarnessActions] => {
     
     // Open in new tab
     window.open(fullUrl, '_blank');
-  }, [state.apiUrl, state.frameSource, state.screenSize, state.background]);
+  }, [state.apiUrl, state.frameSource, state.privyAppId, state.screenSize, state.background]);
 
   const actions: TestHarnessActions = {
     setApiUrl,
     setFrameSource,
+    setPrivyAppId,
     setScreenSize,
     toggleBorder,
     signOut,

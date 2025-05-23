@@ -1,7 +1,7 @@
 import React from 'react';
 import { ComponentUnderTestProps } from '../types';
 
-const ComponentUnderTest: React.FC<ComponentUnderTestProps> = ({ apiUrl, frameSource }) => {
+const ComponentUnderTest: React.FC<ComponentUnderTestProps> = ({ apiUrl, frameSource, privyAppId }) => {
   return (
     <div className="bg-white p-6 rounded-lg shadow-md">
       <h2 className="text-xl font-semibold mb-4">Component Under Test</h2>
@@ -12,7 +12,7 @@ const ComponentUnderTest: React.FC<ComponentUnderTestProps> = ({ apiUrl, frameSo
       <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 mb-4">
         <h3 className="text-sm font-medium text-gray-700 mb-2">Props Received:</h3>
         <pre className="text-sm overflow-x-auto p-2 bg-gray-100 rounded">
-          {JSON.stringify({ apiUrl, frameSource }, null, 2)}
+          {JSON.stringify({ apiUrl, frameSource, privyAppId }, null, 2)}
         </pre>
       </div>
       
