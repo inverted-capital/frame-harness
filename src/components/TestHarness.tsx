@@ -14,22 +14,16 @@ const getBackgroundStyles = (backgroundType: BackgroundType) => {
   switch (backgroundType) {
     case 'white':
       return 'bg-white';
-    case 'gray':
-      return 'bg-gray-200';
-    case 'black':
-      return 'bg-black';
     case 'checkered':
       return 'bg-checkered';
-    case 'gradient':
-      return 'bg-gradient-to-r from-blue-300 to-purple-300';
     default:
-      return 'bg-white';
+      return 'bg-checkered';
   }
 };
 
 const TestHarness: React.FC = () => {
   const [state, actions] = useTestHarness();
-  const { apiUrl, frameSource, privyAppId, screenSize, isDashboardVisible, isAuthenticated, showBorder, background } = state;
+  const { apiUrl, frameSource, privyAppId, screenSize, isDashboardVisible, isAuthenticated, showBorder, background, scope } = state;
 
   // Redirect to login if not authenticated
   if (!isAuthenticated) {
@@ -75,6 +69,7 @@ const TestHarness: React.FC = () => {
                   apiUrl={apiUrl} 
                   frameSource={frameSource}
                   privyAppId={privyAppId}
+                  scope={scope}
                 />
               </div>
             </div>

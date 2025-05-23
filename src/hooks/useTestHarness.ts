@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect } from 'react';
-import { ScreenSize, TestHarnessState, TestHarnessActions, BackgroundType } from '../types';
+import { ScreenSize, TestHarnessState, TestHarnessActions, BackgroundType, ScopeProps } from '../types';
 
 export const useTestHarness = (): [TestHarnessState, TestHarnessActions] => {
   // Check URL params for dashboard visibility
@@ -18,6 +18,12 @@ export const useTestHarness = (): [TestHarnessState, TestHarnessActions] => {
     isAuthenticated: true,
     showBorder: false,
     background: 'checkered',
+    scope: {
+      repo: '',
+      branch: '',
+      commit: '',
+      path: ''
+    }
   });
 
   // Update state from URL params on mount
@@ -29,6 +35,10 @@ export const useTestHarness = (): [TestHarnessState, TestHarnessActions] => {
     const privyAppId = urlParams.get('privyAppId');
     const screenSize = urlParams.get('screenSize');
     const background = urlParams.get('background');
+    const repo = urlParams.get('repo');
+    const branch = urlParams.get('branch');
+    const commit = urlParams.get('commit');
+    const path = urlParams.get('path');
     
     setState(prev => ({
       ...prev,
@@ -37,6 +47,12 @@ export const useTestHarness = (): [TestHarnessState, TestHarnessActions] => {
       privyAppId: privyAppId || prev.privyAppId,
       screenSize: (screenSize as ScreenSize) || prev.screenSize,
       background: (background as BackgroundType) || prev.background,
+      scope: {
+        repo: repo || prev.scope.repo,
+        branch: branch || prev.scope.branch,
+        commit: commit || prev.scope.commit,
+        path: path || prev.scope.path
+      }
     }));
   }, []);
 
@@ -64,6 +80,16 @@ export const useTestHarness = (): [TestHarnessState, TestHarnessActions] => {
     setState((prev) => ({ ...prev, background }));
   }, []);
 
+  const setScope = useCallback((field: keyof ScopeProps, value: string) => {
+    setState((prev) => ({
+      ...prev,
+      scope: {
+        ...prev.scope,
+        [field]: value
+      }
+    }));
+  }, []);
+
   const signOut = useCallback(() => {
     setState((prev) => ({ ...prev, isAuthenticated: false }));
   }, []);
@@ -79,7 +105,11 @@ export const useTestHarness = (): [TestHarnessState, TestHarnessActions] => {
       `frameSource=${state.frameSource}`,
       `privyAppId=${state.privyAppId}`,
       `screenSize=${state.screenSize}`,
-      `background=${state.background}`
+      `background=${state.background}`,
+      `repo=${state.scope.repo || ''}`,
+      `branch=${state.scope.branch || ''}`,
+      `commit=${state.scope.commit || ''}`,
+      `path=${state.scope.path || ''}`
     ].join('&');
     
     // Combine base URL and unencoded query parameters
@@ -87,7 +117,7 @@ export const useTestHarness = (): [TestHarnessState, TestHarnessActions] => {
     
     // Open in new tab
     window.open(fullUrl, '_blank');
-  }, [state.apiUrl, state.frameSource, state.privyAppId, state.screenSize, state.background]);
+  }, [state.apiUrl, state.frameSource, state.privyAppId, state.screenSize, state.background, state.scope]);
 
   const actions: TestHarnessActions = {
     setApiUrl,
@@ -98,6 +128,7 @@ export const useTestHarness = (): [TestHarnessState, TestHarnessActions] => {
     signOut,
     openFullscreen,
     setBackground,
+    setScope
   };
 
   return [state, actions];

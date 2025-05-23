@@ -1,6 +1,6 @@
 import React from 'react';
 import { ScreenSize, TestHarnessState, TestHarnessActions, BackgroundType } from '../types';
-import { Smartphone, Tablet, Monitor, LogOut, Maximize, Square, Sun, CircleSlash, CheckSquare } from 'lucide-react';
+import { Smartphone, Tablet, Monitor, LogOut, Maximize, Square } from 'lucide-react';
 
 interface DashboardProps {
   state: TestHarnessState;
@@ -8,8 +8,8 @@ interface DashboardProps {
 }
 
 const Dashboard: React.FC<DashboardProps> = ({ state, actions }) => {
-  const { apiUrl, frameSource, privyAppId, screenSize, showBorder, background } = state;
-  const { setApiUrl, setFrameSource, setPrivyAppId, setScreenSize, toggleBorder, signOut, openFullscreen, setBackground } = actions;
+  const { apiUrl, frameSource, privyAppId, screenSize, showBorder, background, scope } = state;
+  const { setApiUrl, setFrameSource, setPrivyAppId, setScreenSize, toggleBorder, signOut, openFullscreen, setBackground, setScope } = actions;
 
   return (
     <div className="w-full bg-white shadow-md border-b border-gray-200 px-4 py-4 transition-all">
@@ -34,7 +34,7 @@ const Dashboard: React.FC<DashboardProps> = ({ state, actions }) => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
           <div className="space-y-4">
             <h2 className="text-sm font-medium text-gray-700 uppercase tracking-wider">URLs</h2>
             <div className="space-y-3">
@@ -81,6 +81,64 @@ const Dashboard: React.FC<DashboardProps> = ({ state, actions }) => {
           </div>
 
           <div className="space-y-4">
+            <h2 className="text-sm font-medium text-gray-700 uppercase tracking-wider">Scope</h2>
+            <div className="space-y-3">
+              <div>
+                <label htmlFor="repo" className="block text-sm font-medium text-gray-700">
+                  Repo
+                </label>
+                <input
+                  id="repo"
+                  type="text"
+                  value={scope.repo}
+                  onChange={(e) => setScope('repo', e.target.value)}
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  placeholder="username/repo"
+                />
+              </div>
+              <div>
+                <label htmlFor="branch" className="block text-sm font-medium text-gray-700">
+                  Branch
+                </label>
+                <input
+                  id="branch"
+                  type="text"
+                  value={scope.branch}
+                  onChange={(e) => setScope('branch', e.target.value)}
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  placeholder="main"
+                />
+              </div>
+              <div>
+                <label htmlFor="commit" className="block text-sm font-medium text-gray-700">
+                  Commit
+                </label>
+                <input
+                  id="commit"
+                  type="text"
+                  value={scope.commit}
+                  onChange={(e) => setScope('commit', e.target.value)}
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  placeholder="abc123"
+                />
+              </div>
+              <div>
+                <label htmlFor="path" className="block text-sm font-medium text-gray-700">
+                  Path
+                </label>
+                <input
+                  id="path"
+                  type="text"
+                  value={scope.path}
+                  onChange={(e) => setScope('path', e.target.value)}
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  placeholder="/src/components"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="space-y-4">
             <h2 className="text-sm font-medium text-gray-700 uppercase tracking-wider">Screen Size</h2>
             <div className="flex gap-3">
               <button
@@ -115,18 +173,7 @@ const Dashboard: React.FC<DashboardProps> = ({ state, actions }) => {
 
           <div className="space-y-4">
             <h2 className="text-sm font-medium text-gray-700 uppercase tracking-wider">Display Options</h2>
-            <div className="grid grid-cols-2 gap-3">
-              <button
-                onClick={toggleBorder}
-                className={`flex flex-col items-center justify-center px-4 py-3 rounded-lg transition-colors ${
-                  showBorder ? 'bg-blue-100 text-blue-800 border border-blue-300' : 'bg-gray-100 text-gray-700 border border-gray-200 hover:bg-gray-200'
-                }`}
-              >
-                <Square size={24} />
-                <span className="mt-1 text-sm">{showBorder ? 'Hide Border' : 'Show Border'}</span>
-              </button>
-            </div>
-
+            
             <div className="space-y-2">
               <h3 className="text-sm font-medium text-gray-700">Background</h3>
               <div className="grid grid-cols-2 gap-2">
@@ -140,24 +187,6 @@ const Dashboard: React.FC<DashboardProps> = ({ state, actions }) => {
                   <span className="text-sm">White</span>
                 </button>
                 <button
-                  onClick={() => setBackground('gray')}
-                  className={`flex items-center gap-2 px-3 py-2 rounded transition-colors ${
-                    background === 'gray' ? 'bg-blue-100 text-blue-800 border border-blue-300' : 'bg-white text-gray-700 border border-gray-200 hover:bg-gray-50'
-                  }`}
-                >
-                  <div className="w-4 h-4 bg-gray-200 rounded"></div>
-                  <span className="text-sm">Gray</span>
-                </button>
-                <button
-                  onClick={() => setBackground('black')}
-                  className={`flex items-center gap-2 px-3 py-2 rounded transition-colors ${
-                    background === 'black' ? 'bg-blue-100 text-blue-800 border border-blue-300' : 'bg-white text-gray-700 border border-gray-200 hover:bg-gray-50'
-                  }`}
-                >
-                  <div className="w-4 h-4 bg-black rounded"></div>
-                  <span className="text-sm">Black</span>
-                </button>
-                <button
                   onClick={() => setBackground('checkered')}
                   className={`flex items-center gap-2 px-3 py-2 rounded transition-colors ${
                     background === 'checkered' ? 'bg-blue-100 text-blue-800 border border-blue-300' : 'bg-white text-gray-700 border border-gray-200 hover:bg-gray-50'
@@ -169,16 +198,19 @@ const Dashboard: React.FC<DashboardProps> = ({ state, actions }) => {
                   </div>
                   <span className="text-sm">Checkered</span>
                 </button>
-                <button
-                  onClick={() => setBackground('gradient')}
-                  className={`flex items-center gap-2 px-3 py-2 rounded transition-colors ${
-                    background === 'gradient' ? 'bg-blue-100 text-blue-800 border border-blue-300' : 'bg-white text-gray-700 border border-gray-200 hover:bg-gray-50'
-                  }`}
-                >
-                  <div className="w-4 h-4 bg-gradient-to-r from-blue-300 to-purple-300 rounded"></div>
-                  <span className="text-sm">Gradient</span>
-                </button>
               </div>
+            </div>
+            
+            <div>
+              <button
+                onClick={toggleBorder}
+                className={`flex items-center gap-2 px-3 py-2 rounded transition-colors ${
+                  showBorder ? 'bg-blue-100 text-blue-800 border border-blue-300' : 'bg-white text-gray-700 border border-gray-200 hover:bg-gray-50'
+                }`}
+              >
+                <Square size={16} />
+                <span className="text-sm">{showBorder ? 'Hide Border' : 'Show Border'}</span>
+              </button>
             </div>
           </div>
 
@@ -209,6 +241,22 @@ const Dashboard: React.FC<DashboardProps> = ({ state, actions }) => {
                 <div className="sm:col-span-1">
                   <dt className="text-sm font-medium text-gray-500">Background</dt>
                   <dd className="mt-1 text-sm text-gray-900 capitalize">{background}</dd>
+                </div>
+                <div className="sm:col-span-1">
+                  <dt className="text-sm font-medium text-gray-500">Repo</dt>
+                  <dd className="mt-1 text-sm text-gray-900 truncate">{scope.repo || '-'}</dd>
+                </div>
+                <div className="sm:col-span-1">
+                  <dt className="text-sm font-medium text-gray-500">Branch</dt>
+                  <dd className="mt-1 text-sm text-gray-900 truncate">{scope.branch || '-'}</dd>
+                </div>
+                <div className="sm:col-span-1">
+                  <dt className="text-sm font-medium text-gray-500">Commit</dt>
+                  <dd className="mt-1 text-sm text-gray-900 truncate">{scope.commit || '-'}</dd>
+                </div>
+                <div className="sm:col-span-1">
+                  <dt className="text-sm font-medium text-gray-500">Path</dt>
+                  <dd className="mt-1 text-sm text-gray-900 truncate">{scope.path || '-'}</dd>
                 </div>
               </dl>
             </div>

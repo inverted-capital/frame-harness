@@ -1,5 +1,12 @@
 export type ScreenSize = 'mobile' | 'tablet' | 'desktop';
-export type BackgroundType = 'white' | 'gray' | 'black' | 'checkered' | 'gradient';
+export type BackgroundType = 'white' | 'checkered';
+
+export interface ScopeProps {
+  repo?: string;
+  branch?: string;
+  commit?: string;
+  path?: string;
+}
 
 export interface TestHarnessState {
   apiUrl: string;
@@ -10,6 +17,7 @@ export interface TestHarnessState {
   isAuthenticated: boolean;
   showBorder: boolean;
   background: BackgroundType;
+  scope: ScopeProps;
 }
 
 export interface TestHarnessActions {
@@ -21,10 +29,12 @@ export interface TestHarnessActions {
   signOut: () => void;
   openFullscreen: () => void;
   setBackground: (type: BackgroundType) => void;
+  setScope: (field: keyof ScopeProps, value: string) => void;
 }
 
 export interface ComponentUnderTestProps {
   apiUrl: string;
   frameSource: string;
   privyAppId: string;
+  scope: ScopeProps;
 }
