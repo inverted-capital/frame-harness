@@ -46,10 +46,10 @@ const reducer = (state: TestHarnessState, action: Action): TestHarnessState => {
 export const useTestHarness = (): [TestHarnessState, TestHarnessActions] => {
   // Check URL params for dashboard visibility
   const initDashboardVisible = () => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const hideParam = urlParams.get('hideDashboard');
-    return hideParam !== 'true';
-  };
+    const urlParams = new URLSearchParams(window.location.search)
+    const hideParam = urlParams.get('hideDashboard')
+    return hideParam !== 'true'
+  }
 
   const [state, dispatch] = useReducer(reducer, {
     apiUrl: 'https://api.example.com',
@@ -127,7 +127,7 @@ export const useTestHarness = (): [TestHarnessState, TestHarnessActions] => {
 
   const openFullscreen = useCallback(() => {
     // Create base URL without existing query parameters
-    const baseUrl = window.location.href.split('?')[0];
+    const baseUrl = window.location.href.split('?')[0]
 
     const params = new URLSearchParams({
       hideDashboard: 'true',
@@ -140,13 +140,20 @@ export const useTestHarness = (): [TestHarnessState, TestHarnessActions] => {
       branch: state.scope.branch || '',
       commit: state.scope.commit || '',
       path: state.scope.path || ''
-    });
+    })
 
-    const fullUrl = `${baseUrl}?${params.toString()}`;
+    const fullUrl = `${baseUrl}?${params.toString()}`
 
     // Open in new tab
-    window.open(fullUrl, '_blank');
-  }, [state.apiUrl, state.frameSource, state.privyAppId, state.screenSize, state.background, state.scope]);
+    window.open(fullUrl, '_blank')
+  }, [
+    state.apiUrl,
+    state.frameSource,
+    state.privyAppId,
+    state.screenSize,
+    state.background,
+    state.scope
+  ])
 
   const actions: TestHarnessActions = {
     setApiUrl,
@@ -158,7 +165,7 @@ export const useTestHarness = (): [TestHarnessState, TestHarnessActions] => {
     openFullscreen,
     setBackground,
     setScope
-  };
+  }
 
-  return [state, actions];
-};
+  return [state, actions]
+}
