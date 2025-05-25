@@ -126,26 +126,24 @@ export const useTestHarness = (): [TestHarnessState, TestHarnessActions] => {
   }, [])
 
   const openFullscreen = useCallback(() => {
-    // Create base URL without query parameters
+    // Create base URL without existing query parameters
     const baseUrl = window.location.href.split('?')[0];
-    
-    // Manually create query string without encoding special characters
-    const queryParams = [
-      'hideDashboard=true',
-      `apiUrl=${state.apiUrl}`,
-      `frameSource=${state.frameSource}`,
-      `privyAppId=${state.privyAppId}`,
-      `screenSize=${state.screenSize}`,
-      `background=${state.background}`,
-      `repo=${state.scope.repo || ''}`,
-      `branch=${state.scope.branch || ''}`,
-      `commit=${state.scope.commit || ''}`,
-      `path=${state.scope.path || ''}`
-    ].join('&');
-    
-    // Combine base URL and unencoded query parameters
-    const fullUrl = `${baseUrl}?${queryParams}`;
-    
+
+    const params = new URLSearchParams({
+      hideDashboard: 'true',
+      apiUrl: state.apiUrl,
+      frameSource: state.frameSource,
+      privyAppId: state.privyAppId,
+      screenSize: state.screenSize,
+      background: state.background,
+      repo: state.scope.repo || '',
+      branch: state.scope.branch || '',
+      commit: state.scope.commit || '',
+      path: state.scope.path || ''
+    });
+
+    const fullUrl = `${baseUrl}?${params.toString()}`;
+
     // Open in new tab
     window.open(fullUrl, '_blank');
   }, [state.apiUrl, state.frameSource, state.privyAppId, state.screenSize, state.background, state.scope]);
