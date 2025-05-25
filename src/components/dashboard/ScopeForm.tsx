@@ -1,4 +1,5 @@
 import { ScopeProps, TestHarnessActions } from '../../types'
+import LabeledInput from './LabeledInput'
 
 interface ScopeFormProps {
   scope: ScopeProps
@@ -11,70 +12,34 @@ const ScopeForm: React.FC<ScopeFormProps> = ({ scope, setScope }) => (
       Scope
     </h2>
     <div className="space-y-3">
-      <div>
-        <label
-          htmlFor="repo"
-          className="block text-sm font-medium text-gray-700"
-        >
-          Repo
-        </label>
-        <input
-          id="repo"
-          type="text"
-          value={scope.repo}
-          onChange={(e) => setScope('repo', e.target.value)}
-          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-          placeholder="username/repo"
-        />
-      </div>
-      <div>
-        <label
-          htmlFor="branch"
-          className="block text-sm font-medium text-gray-700"
-        >
-          Branch
-        </label>
-        <input
-          id="branch"
-          type="text"
-          value={scope.branch}
-          onChange={(e) => setScope('branch', e.target.value)}
-          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-          placeholder="main"
-        />
-      </div>
-      <div>
-        <label
-          htmlFor="commit"
-          className="block text-sm font-medium text-gray-700"
-        >
-          Commit
-        </label>
-        <input
-          id="commit"
-          type="text"
-          value={scope.commit}
-          onChange={(e) => setScope('commit', e.target.value)}
-          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-          placeholder="abc123"
-        />
-      </div>
-      <div>
-        <label
-          htmlFor="path"
-          className="block text-sm font-medium text-gray-700"
-        >
-          Path
-        </label>
-        <input
-          id="path"
-          type="text"
-          value={scope.path}
-          onChange={(e) => setScope('path', e.target.value)}
-          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-          placeholder="/src/components"
-        />
-      </div>
+      <LabeledInput
+        id="repo"
+        label="Repo"
+        value={scope.repo}
+        onChange={(v) => setScope('repo', v)}
+        placeholder="username/repo"
+      />
+      <LabeledInput
+        id="branch"
+        label="Branch"
+        value={scope.branch}
+        onChange={(v) => setScope('branch', v)}
+        placeholder="main"
+      />
+      <LabeledInput
+        id="commit"
+        label="Commit"
+        value={scope.commit}
+        onChange={(v) => setScope('commit', v)}
+        placeholder="abc123"
+      />
+      <LabeledInput
+        id="path"
+        label="Path"
+        value={scope.path}
+        onChange={(v) => setScope('path', v)}
+        placeholder="/src/components"
+      />
     </div>
   </div>
 )
