@@ -55,7 +55,7 @@ const DisplayOptions: React.FC<DisplayOptionsProps> = ({
   toggleBorder
 }) => (
   <div className="space-y-4">
-    <h2 className="text-sm font-medium text-gray-700 uppercase tracking-wider">
+    <h2 className="section-heading">
       Display Options
     </h2>
     <div className="space-y-4">

@@ -19,7 +19,7 @@ const UrlsForm: React.FC<UrlsFormProps> = ({
   setPrivyAppId
 }) => (
   <div className="space-y-4">
-    <h2 className="text-sm font-medium text-gray-700 uppercase tracking-wider">
+    <h2 className="section-heading">
       URLs
     </h2>
     <div className="space-y-3">

@@ -14,7 +14,7 @@ const ComponentUnderTest: React.FC<ComponentUnderTestProps> = ({
         component you want to test.
       </p>
 
-      <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 mb-4">
+      <div className="info-box mb-4">
         <h3 className="text-sm font-medium text-gray-700 mb-2">
           Props Received:
         </h3>

@@ -8,7 +8,7 @@ interface ScopeFormProps {
 
 const ScopeForm: React.FC<ScopeFormProps> = ({ scope, setScope }) => (
   <div className="space-y-4">
-    <h2 className="text-sm font-medium text-gray-700 uppercase tracking-wider">
+    <h2 className="section-heading">
       Scope
     </h2>
     <div className="space-y-3">
