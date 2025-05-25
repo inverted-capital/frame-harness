@@ -1,7 +1,8 @@
+import { useEffect } from 'react'
 import Dashboard from './Dashboard'
 import ComponentUnderTest from './ComponentUnderTest'
-import { useTestHarness } from '../hooks/useTestHarness'
 import { ScreenSize, BackgroundType } from '../types'
+import { useHarnessStore } from '../store/useHarnessStore'
 
 const deviceDimensions = {
   mobile: { width: '375px', height: '667px' },
@@ -21,7 +22,6 @@ const getBackgroundStyles = (backgroundType: BackgroundType) => {
 }
 
 const TestHarness: React.FC = () => {
-  const [state, actions] = useTestHarness()
   const {
     apiUrl,
     frameSource,
@@ -31,8 +31,13 @@ const TestHarness: React.FC = () => {
     isAuthenticated,
     showBorder,
     background,
-    scope
-  } = state
+    scope,
+    initializeFromUrl
+  } = useHarnessStore()
+
+  useEffect(() => {
+    initializeFromUrl()
+  }, [initializeFromUrl])
 
   // Redirect to login if not authenticated
   if (!isAuthenticated) {
@@ -60,7 +65,7 @@ const TestHarness: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      {isDashboardVisible && <Dashboard state={state} actions={actions} />}
+      {isDashboardVisible && <Dashboard />}
 
       <div
         className={`flex-1 flex items-center justify-center py-8 ${backgroundStyles}`}

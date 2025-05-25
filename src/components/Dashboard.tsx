@@ -1,16 +1,11 @@
-import { TestHarnessState, TestHarnessActions } from '../types'
 import { LogOut, Maximize } from 'lucide-react'
 import UrlsForm from './dashboard/UrlsForm'
 import ScopeForm from './dashboard/ScopeForm'
 import DisplayOptions from './dashboard/DisplayOptions'
 import ComponentInfo from './dashboard/ComponentInfo'
+import { useHarnessStore } from '../store/useHarnessStore'
 
-interface DashboardProps {
-  state: TestHarnessState
-  actions: TestHarnessActions
-}
-
-const Dashboard: React.FC<DashboardProps> = ({ state, actions }) => {
+const Dashboard: React.FC = () => {
   const {
     apiUrl,
     frameSource,
@@ -18,9 +13,7 @@ const Dashboard: React.FC<DashboardProps> = ({ state, actions }) => {
     screenSize,
     showBorder,
     background,
-    scope
-  } = state
-  const {
+    scope,
     setApiUrl,
     setFrameSource,
     setPrivyAppId,
@@ -30,7 +23,7 @@ const Dashboard: React.FC<DashboardProps> = ({ state, actions }) => {
     openFullscreen,
     setBackground,
     setScope
-  } = actions
+  } = useHarnessStore()
 
   return (
     <div className="w-full bg-white shadow-md border-b border-gray-200 px-4 py-4 transition-all">
