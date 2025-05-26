@@ -18,7 +18,6 @@
   "dependencies": {
     "@artifact/client": "npm:@jsr/artifact__client@^0.0.78",
     "@privy-io/react-auth": "^2.13.3",
-    "@tailwindcss/postcss": "^4.1.7",
     "@tailwindcss/vite": "^4.1.7",
     "debug": "^4.4.1",
     "from": "^0.1.7",
