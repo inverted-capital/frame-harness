@@ -1,7 +1,6 @@
 import { ComponentUnderTestProps } from '../types'
 
 const ComponentUnderTest: React.FC<ComponentUnderTestProps> = ({
-  apiUrl,
   frameSource,
   privyAppId,
   scope
@@ -19,7 +18,7 @@ const ComponentUnderTest: React.FC<ComponentUnderTestProps> = ({
           Props Received:
         </h3>
         <pre className="text-sm overflow-x-auto p-2 bg-gray-100 rounded">
-          {JSON.stringify({ apiUrl, frameSource, privyAppId, scope }, null, 2)}
+          {JSON.stringify({ frameSource, privyAppId, scope }, null, 2)}
         </pre>
       </div>
 

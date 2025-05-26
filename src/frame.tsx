@@ -5,7 +5,6 @@ import ComponentUnderTest from './components/ComponentUnderTest'
 
 function FrameApp() {
   const params = new URLSearchParams(window.location.search)
-  const apiUrl = params.get('apiUrl') || 'https://api.example.com'
   const frameSource = params.get('frameSource') || ''
   const privyAppId = params.get('privyAppId') || ''
   const scope = {
@@ -27,7 +26,6 @@ function FrameApp() {
       onNavigateTo={() => {}}
     >
       <ComponentUnderTest
-        apiUrl={apiUrl}
         frameSource={frameSource}
         privyAppId={privyAppId}
         scope={scope}

@@ -16,7 +16,7 @@
     "knip": "knip --production --fix --allow-remove-files --format --exports"
   },
   "dependencies": {
-    "@artifact/client": "npm:@jsr/artifact__client@^0.0.78",
+    "@artifact/client": "npm:@jsr/artifact__client@^0.0.79",
     "@privy-io/react-auth": "^2.13.3",
     "@tailwindcss/vite": "^4.1.7",
     "debug": "^4.4.1",

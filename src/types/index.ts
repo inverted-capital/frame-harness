@@ -33,7 +33,6 @@ export interface TestHarnessActions {
 }
 
 export interface ComponentUnderTestProps {
-  apiUrl: string
   frameSource: string
   privyAppId: string
   scope: ScopeProps
