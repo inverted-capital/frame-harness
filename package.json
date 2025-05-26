@@ -18,6 +18,7 @@
   "dependencies": {
     "@artifact/client": "npm:@jsr/artifact__client@^0.0.78",
     "@privy-io/react-auth": "^2.13.3",
+    "@tailwindcss/postcss": "^4.1.7",
     "debug": "^4.4.1",
     "lucide-react": "^0.511.0",
     "react": "^19.1.0",
