@@ -16,5 +16,13 @@ export default defineConfig({
       'Cross-Origin-Opener-Policy': 'unsafe-none'
     }
   },
-  base: './'
+  base: './',
+  build: {
+    rollupOptions: {
+      input: {
+        main: path.resolve(__dirname, 'index.html'),
+        frame: path.resolve(__dirname, 'frame.html')
+      }
+    }
+  }
 })
