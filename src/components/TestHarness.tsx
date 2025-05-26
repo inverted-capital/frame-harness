@@ -1,6 +1,8 @@
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 import Dashboard from './Dashboard'
-import ComponentUnderTest from './ComponentUnderTest'
+import { ArtifactFrameHolder } from '@artifact/client'
+import { HOST_SCOPE } from '@artifact/client/api'
+import { usePrivy } from '@privy-io/react-auth'
 import { ScreenSize, BackgroundType } from '../types'
 import { useHarnessStore } from '../store/useHarnessStore'
 
@@ -34,6 +36,20 @@ const TestHarness: React.FC = () => {
     scope,
     initializeFromUrl
   } = useHarnessStore()
+  const { user } = usePrivy()
+  const did = user?.id
+  const frameUrl = React.useMemo(() => {
+    const base = frameSource || '/frame.html'
+    const url = new URL(base, window.location.origin)
+    url.searchParams.set('apiUrl', apiUrl)
+    url.searchParams.set('frameSource', base)
+    url.searchParams.set('privyAppId', privyAppId)
+    if (scope.repo) url.searchParams.set('repo', scope.repo)
+    if (scope.branch) url.searchParams.set('branch', scope.branch)
+    if (scope.commit) url.searchParams.set('commit', scope.commit)
+    if (scope.path) url.searchParams.set('path', scope.path)
+    return url.toString()
+  }, [apiUrl, frameSource, privyAppId, scope])
 
   useEffect(() => {
     initializeFromUrl()
@@ -92,12 +108,23 @@ const TestHarness: React.FC = () => {
                 ${showBorder ? 'bg-white p-4' : ''}
               `}
               >
-                <ComponentUnderTest
-                  apiUrl={apiUrl}
-                  frameSource={frameSource}
-                  privyAppId={privyAppId}
-                  scope={scope}
-                />
+                <ArtifactFrameHolder
+                  src={frameUrl}
+                  target={{
+                    ...HOST_SCOPE,
+                    ...scope,
+                    did: did || HOST_SCOPE.did
+                  }}
+                  diffs={[]}
+                  access={[]}
+                  selection={undefined}
+                  onSelection={() => {}}
+                  onMessage={() => {}}
+                  onAccessRequest={() => {}}
+                  onNavigateTo={() => {}}
+                >
+                  {null}
+                </ArtifactFrameHolder>
               </div>
             </div>
           </div>
