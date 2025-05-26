@@ -41,14 +41,19 @@ const TestHarness: React.FC = () => {
   const frameUrl = React.useMemo(() => {
     const base = frameSource || '/frame.html'
     const url = new URL(base, window.location.origin)
-    url.searchParams.set('apiUrl', apiUrl)
-    url.searchParams.set('frameSource', base)
-    url.searchParams.set('privyAppId', privyAppId)
-    if (scope.repo) url.searchParams.set('repo', scope.repo)
-    if (scope.branch) url.searchParams.set('branch', scope.branch)
-    if (scope.commit) url.searchParams.set('commit', scope.commit)
-    if (scope.path) url.searchParams.set('path', scope.path)
-    return url.toString()
+    const params: Record<string, string> = {
+      apiUrl,
+      frameSource: base,
+      privyAppId
+    }
+    if (scope.repo) params.repo = scope.repo
+    if (scope.branch) params.branch = scope.branch
+    if (scope.commit) params.commit = scope.commit
+    if (scope.path) params.path = scope.path
+    const query = Object.entries(params)
+      .map(([k, v]) => `${k}=${v}`)
+      .join('&')
+    return `${url.origin}${url.pathname}?${query}`
   }, [apiUrl, frameSource, privyAppId, scope])
 
   useEffect(() => {
