@@ -19,9 +19,7 @@ const UrlsForm: React.FC<UrlsFormProps> = ({
   setPrivyAppId
 }) => (
   <div className="space-y-4">
-    <h2 className="section-heading">
-      URLs
-    </h2>
+    <h2 className="section-heading">URLs</h2>
     <div className="space-y-3">
       <LabeledInput
         id="api-url"

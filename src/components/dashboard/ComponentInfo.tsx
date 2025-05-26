@@ -20,9 +20,7 @@ const ComponentInfo: React.FC<ComponentInfoProps> = ({
   scope
 }) => (
   <div className="space-y-4">
-    <h2 className="section-heading">
-      Component Info
-    </h2>
+    <h2 className="section-heading">Component Info</h2>
     <div className="info-box">
       <dl className="grid grid-cols-1 gap-x-4 gap-y-2">
         <div className="sm:col-span-1">
