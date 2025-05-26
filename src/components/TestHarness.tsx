@@ -127,9 +127,7 @@ const TestHarness: React.FC = () => {
                   onMessage={() => {}}
                   onAccessRequest={() => {}}
                   onNavigateTo={() => {}}
-                >
-                  {null}
-                </ArtifactFrameHolder>
+                />
               </div>
             </div>
           </div>
