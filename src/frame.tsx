@@ -37,3 +37,5 @@ function FrameApp() {
 }
 
 createRoot(document.getElementById('frame-root')!).render(<FrameApp />)
+
+export default FrameApp
