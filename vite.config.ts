@@ -23,12 +23,6 @@ export default defineConfig({
       input: {
         main: path.resolve(__dirname, 'index.html'),
         frame: path.resolve(__dirname, 'frame.html')
-      },
-      external: ['@privy-io/react-auth'],
-      output: {
-        globals: {
-          '@privy-io/react-auth': 'PrivyReactAuth'
-        }
       }
     }
   }
