@@ -6,7 +6,7 @@ import path from 'path'
 export default defineConfig({
   plugins: [react(), tailwindcss()],
 
-  optimizeDeps: { exclude: ['lucide-react'] },
+  optimizeDeps: { exclude: ['lucide-react', '@privy-io/react-auth'] },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src')
@@ -23,7 +23,8 @@ export default defineConfig({
       input: {
         main: path.resolve(__dirname, 'index.html'),
         frame: path.resolve(__dirname, 'frame.html')
-      }
+      },
+      external: ['@privy-io/react-auth']
     }
   }
 })
