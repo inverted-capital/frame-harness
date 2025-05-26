@@ -53,7 +53,7 @@ const TestHarness: React.FC = () => {
 
   useEffect(() => {
     initializeFromUrl()
-  }, [])
+  }, [initializeFromUrl])
 
   // Redirect to login if not authenticated
   if (!isAuthenticated) {

@@ -13,7 +13,7 @@ interface Store extends TestHarnessState, TestHarnessActions {
 
 export const useHarnessStore = create<Store>((set, get) => ({
   apiUrl: 'https://api.example.com',
-  frameSource: 'https://source.example.com',
+  frameSource: `${window.location.origin}/frame.html`,
   privyAppId: '123456789',
   screenSize: 'desktop',
   isDashboardVisible: true,
