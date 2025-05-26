@@ -1,4 +1,5 @@
 import { createRoot } from 'react-dom/client'
+import { useEffect } from 'react'
 import { ArtifactFrame } from '@artifact/client'
 import { HOST_SCOPE } from '@artifact/client/api'
 import ComponentUnderTest from './components/ComponentUnderTest'
@@ -13,6 +14,12 @@ function FrameApp() {
     commit: params.get('commit') || '',
     path: params.get('path') || ''
   }
+
+  useEffect(() => {
+    if (window.location.search) {
+      window.history.replaceState(null, '', window.location.pathname)
+    }
+  }, [])
 
   return (
     <ArtifactFrame

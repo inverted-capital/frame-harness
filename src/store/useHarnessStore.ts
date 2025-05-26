@@ -30,7 +30,7 @@ export const useHarnessStore = create<Store>((set, get) => ({
   openFullscreen: () => {
     const state = get()
     const baseUrl = window.location.href.split('?')[0]
-    const params = new URLSearchParams({
+    const params = {
       hideDashboard: 'true',
       apiUrl: state.apiUrl,
       frameSource: state.frameSource,
@@ -41,8 +41,12 @@ export const useHarnessStore = create<Store>((set, get) => ({
       branch: state.scope.branch || '',
       commit: state.scope.commit || '',
       path: state.scope.path || ''
-    })
-    const fullUrl = `${baseUrl}?${params.toString()}`
+    }
+    const query = Object.entries(params)
+      .filter(([, v]) => v)
+      .map(([k, v]) => `${k}=${v}`)
+      .join('&')
+    const fullUrl = query ? `${baseUrl}?${query}` : baseUrl
     window.open(fullUrl, '_blank')
   },
   setBackground: (background: BackgroundType) => set({ background }),
@@ -72,5 +76,10 @@ export const useHarnessStore = create<Store>((set, get) => ({
     if (branch) set((state) => ({ scope: { ...state.scope, branch } }))
     if (commit) set((state) => ({ scope: { ...state.scope, commit } }))
     if (path) set((state) => ({ scope: { ...state.scope, path } }))
+
+    // Remove query parameters from the address bar once consumed
+    if (window.location.search) {
+      window.history.replaceState(null, '', window.location.pathname)
+    }
   }
 }))
