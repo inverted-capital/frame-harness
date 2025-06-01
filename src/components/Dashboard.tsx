@@ -4,6 +4,7 @@ import ScopeForm from './dashboard/ScopeForm'
 import DisplayOptions from './dashboard/DisplayOptions'
 import ComponentInfo from './dashboard/ComponentInfo'
 import { useHarnessStore } from '../store/useHarnessStore'
+import { usePrivy } from '@privy-io/react-auth'
 
 const Dashboard: React.FC = () => {
   const {
@@ -19,12 +20,12 @@ const Dashboard: React.FC = () => {
     setPrivyAppId,
     setScreenSize,
     toggleBorder,
-    signOut,
     openFullscreen,
     setBackground,
     setScope,
     resetParams
   } = useHarnessStore()
+  const { logout } = usePrivy()
 
   return (
     <div className="w-full bg-white shadow-md border-b border-gray-200 px-4 py-4 transition-all">
@@ -42,7 +43,7 @@ const Dashboard: React.FC = () => {
               <span>View Fullscreen</span>
             </button>
             <button
-              onClick={signOut}
+              onClick={logout}
               className="flex items-center gap-2 px-3 py-1.5 bg-gray-100 hover:bg-gray-200 rounded-lg text-gray-700 transition-colors"
             >
               <LogOut size={16} />

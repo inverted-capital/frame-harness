@@ -14,7 +14,6 @@ export interface TestHarnessState {
   privyAppId: string
   screenSize: ScreenSize
   isDashboardVisible: boolean
-  isAuthenticated: boolean
   showBorder: boolean
   background: BackgroundType
   scope: ScopeProps
@@ -26,7 +25,6 @@ export interface TestHarnessActions {
   setPrivyAppId: (id: string) => void
   setScreenSize: (size: ScreenSize) => void
   toggleBorder: () => void
-  signOut: () => void
   openFullscreen: () => void
   setBackground: (type: BackgroundType) => void
   setScope: (field: keyof ScopeProps, value: string) => void
