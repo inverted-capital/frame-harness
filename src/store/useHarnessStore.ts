@@ -18,7 +18,7 @@ const LOCAL_STORAGE_KEY = 'harnessParams'
 const defaultState: TestHarnessState = {
   apiUrl: 'https://api.example.com',
   frameSource: `${window.location.origin}/frame.html`,
-  privyAppId: '123456789',
+  privyAppId: 'cma4m3v6400dkl10ld7792jm2',
   screenSize: 'desktop',
   isDashboardVisible: true,
   isAuthenticated: true,

@@ -5,6 +5,9 @@ import { HOST_SCOPE } from '@artifact/client/api'
 import { usePrivy } from '@privy-io/react-auth'
 import { ScreenSize, BackgroundType } from '../types'
 import { useHarnessStore } from '../store/useHarnessStore'
+import Debug from 'debug'
+
+const log = Debug('frame-harness:TestHarness')
 
 const deviceDimensions = {
   mobile: { width: '375px', height: '667px' },
@@ -123,10 +126,18 @@ const TestHarness: React.FC = () => {
                   diffs={[]}
                   access={[]}
                   selection={undefined}
-                  onSelection={() => {}}
-                  onMessage={() => {}}
-                  onAccessRequest={() => {}}
-                  onNavigateTo={() => {}}
+                  onSelection={(selection) => {
+                    log('selection', selection)
+                  }}
+                  onMessage={(message) => {
+                    log('message', message)
+                  }}
+                  onAccessRequest={(request) => {
+                    log('accessRequest', request)
+                  }}
+                  onNavigateTo={(scope) => {
+                    log('navigateTo', scope)
+                  }}
                 />
               </div>
             </div>
