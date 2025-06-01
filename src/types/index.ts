@@ -30,6 +30,7 @@ export interface TestHarnessActions {
   openFullscreen: () => void
   setBackground: (type: BackgroundType) => void
   setScope: (field: keyof ScopeProps, value: string) => void
+  resetParams: () => void
 }
 
 export interface ComponentUnderTestProps {
