@@ -21,7 +21,6 @@ const defaultState: TestHarnessState = {
   privyAppId: 'cma4m3v6400dkl10ld7792jm2',
   screenSize: 'desktop',
   isDashboardVisible: true,
-  isAuthenticated: true,
   showBorder: false,
   background: 'checkered',
   scope: { repo: '', branch: '', commit: '', path: '' }
@@ -35,7 +34,6 @@ export const useHarnessStore = create<Store>()(
       setPrivyAppId: (privyAppId: string) => set({ privyAppId }),
       setScreenSize: (screenSize: ScreenSize) => set({ screenSize }),
       toggleBorder: () => set((state) => ({ showBorder: !state.showBorder })),
-      signOut: () => set({ isAuthenticated: false }),
       openFullscreen: () => {
         const state = get()
         const baseUrl = window.location.href.split('?')[0]
