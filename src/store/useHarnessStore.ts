@@ -16,7 +16,7 @@ interface Store extends TestHarnessState, TestHarnessActions {
 const LOCAL_STORAGE_KEY = 'harnessParams'
 
 const defaultState: TestHarnessState = {
-  apiUrl: 'https://api.example.com',
+  apiUrl: 'https://web-client-shy-dawn-4057.fly.dev/',
   frameSource: `${window.location.origin}/frame.html`,
   privyAppId: 'cma4m3v6400dkl10ld7792jm2',
   screenSize: 'desktop',
