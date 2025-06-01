@@ -22,7 +22,8 @@ const Dashboard: React.FC = () => {
     signOut,
     openFullscreen,
     setBackground,
-    setScope
+    setScope,
+    resetParams
   } = useHarnessStore()
 
   return (
@@ -46,6 +47,12 @@ const Dashboard: React.FC = () => {
             >
               <LogOut size={16} />
               <span>Sign Out</span>
+            </button>
+            <button
+              onClick={resetParams}
+              className="flex items-center gap-2 px-3 py-1.5 bg-red-100 hover:bg-red-200 rounded-lg text-red-700 transition-colors"
+            >
+              <span>Reset</span>
             </button>
           </div>
         </div>
