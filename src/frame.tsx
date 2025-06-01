@@ -1,7 +1,6 @@
 import { createRoot } from 'react-dom/client'
 import { useEffect } from 'react'
-import { ArtifactFrame } from '@artifact/client'
-import { HOST_SCOPE } from '@artifact/client/api'
+import { ArtifactFrame } from '@artifact/client/react'
 import ComponentUnderTest from './components/ComponentUnderTest'
 
 function FrameApp() {
@@ -22,16 +21,7 @@ function FrameApp() {
   }, [])
 
   return (
-    <ArtifactFrame
-      target={{ ...HOST_SCOPE, ...scope }}
-      access={[]}
-      selection={undefined}
-      diffs={[]}
-      onSelection={() => {}}
-      onMessage={() => {}}
-      onAccessRequest={() => {}}
-      onNavigateTo={() => {}}
-    >
+    <ArtifactFrame>
       <ComponentUnderTest
         frameSource={frameSource}
         privyAppId={privyAppId}
