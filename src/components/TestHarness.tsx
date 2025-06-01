@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import Dashboard from './Dashboard'
-import { ArtifactFrameHolder } from '@artifact/client'
+import { ArtifactFrameHolder } from '@artifact/client/react'
 import { HOST_SCOPE } from '@artifact/client/api'
 import { usePrivy } from '@privy-io/react-auth'
 import { ScreenSize, BackgroundType } from '../types'
