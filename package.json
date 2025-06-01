@@ -10,7 +10,8 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "ok": "npm run format:check && npm run type-check && npm run lint && npm run build && npm test --if-present",
+    "ok": "npm run format:check && npm run type-check && npm run lint && npm run build && npm test",
+    "test": "npm run build",
     "preview": "vite preview",
     "up": "npx -y npm-check-updates@latest -u && npm i",
     "knip": "knip --production --fix --allow-remove-files --format --exports"
