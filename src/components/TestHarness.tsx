@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react'
 import Dashboard from './Dashboard'
-import { ArtifactFrameHolder } from '@artifact/client/react'
+import { ArtifactHolder } from '@artifact/client/react'
 import { HOST_SCOPE } from '@artifact/client/api'
+import type { Selection, Message } from '@artifact/client/hooks'
+import type { Scope } from '@artifact/client/api'
 import { usePrivy } from '@privy-io/react-auth'
 import { ScreenSize, BackgroundType } from '../types'
 import { useHarnessStore } from '../store/useHarnessStore'
@@ -93,7 +95,7 @@ const TestHarness: React.FC = () => {
                 ${showBorder ? 'bg-white p-4' : ''}
               `}
               >
-                <ArtifactFrameHolder
+                <ArtifactHolder
                   src={frameUrl}
                   target={{
                     ...HOST_SCOPE,
@@ -103,16 +105,16 @@ const TestHarness: React.FC = () => {
                   diffs={[]}
                   access={[]}
                   selection={undefined}
-                  onSelection={(selection) => {
+                  onSelection={(selection: Selection) => {
                     log('selection', selection)
                   }}
-                  onMessage={(message) => {
+                  onMessage={(message: Message) => {
                     log('message', message)
                   }}
-                  onAccessRequest={(request) => {
+                  onAccessRequest={(request: Scope[]) => {
                     log('accessRequest', request)
                   }}
-                  onNavigateTo={(scope) => {
+                  onNavigateTo={(scope: Scope) => {
                     log('navigateTo', scope)
                   }}
                 />
